@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -8,10 +10,14 @@
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        
+        {% endblock %}
+
+        {% block footer %}
+        {% endblock %}
     </body>
 </html>
