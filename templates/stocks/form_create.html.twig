@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="mt-4">
+        {{ form_start(form) }}
+            <div class="form-group mb-3">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name,{ 'attr' :{'class':'form-control '}}) }}
+            </div>
+            <div class="form-group mb-3">
+                {{ form_label(form.code) }}
+                {{ form_widget(form.code,{ 'attr' :{'class':'form-control '}}) }}
+            </div>
+            <div class="form-group mb-3">
+
+                {{ form_label(form.isdeleted) }}
+                
+                {{ form_widget(form.isdeleted,{ 'attr' :{'class':'form-check-input mt-0'}}) }}
+    
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.timestamp) }}
+                {{ form_widget(form.timestamp,{ 'attr' :{'class':'form-control '}}) }}
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.created_at) }}
+                {{ form_widget(form.created_at,{ 'attr' :{'class':'form-control '}}) }}
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.updated_at) }}
+                {{ form_widget(form.updated_at,{ 'attr' :{'class':'form-control '}}) }}
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.fk_company) }}
+                {{ form_widget(form.fk_company,{ 'attr' :{'class':'btn btn-outline-secondary dropdown-toggle '}}) }}
+            </div>
+
+            <div class="form-group mb-3">
+                {{ form_label(form.currentValuations) }}
+                {{ form_widget(form.currentValuations,{ 'attr' :{'class':'btn btn-outline-secondary dropdown-toggle '}}) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
