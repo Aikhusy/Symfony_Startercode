@@ -34,7 +34,7 @@ class Stocks
 
     #[ORM\ManyToOne(inversedBy: 'stocks')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?company $fk_company = null;
+    private ?Company $fk_company = null;
 
     #[ORM\OneToOne(mappedBy: 'fk_stocks', cascade: ['persist', 'remove'])]
     private ?CurrentValuations $currentValuations = null;
@@ -116,12 +116,12 @@ class Stocks
         return $this;
     }
 
-    public function getFkCompany(): ?company
+    public function getFkCompany(): ?Company
     {
         return $this->fk_company;
     }
 
-    public function setFkCompanys(?company $fk_company): static
+    public function setFkCompanys(?Company $fk_company): static
     {
         $this->fk_company = $fk_company;
 
