@@ -7,6 +7,8 @@ use App\Entity\CurrentValuations;
 use App\Entity\Stocks;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,24 +19,13 @@ class StocksType extends AbstractType
         $builder
             ->add('name')
             ->add('code')
-            ->add('isdeleted')
-            ->add('timestamp', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updated_at', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('created_at', null, [
-                'widget' => 'single_text',
-            ])
             ->add('fk_company', EntityType::class, [
                 'class' => Company::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
+                'choice_value'=>'id'
             ])
-            ->add('currentValuations', EntityType::class, [
-                'class' => CurrentValuations::class,
-                'choice_label' => 'id',
-            ]);
+            ->add('isdeleted',HiddenType::class)
+            ->add('save',SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -23,9 +23,6 @@ class Stocks
     #[ORM\Column]
     private ?bool $isdeleted = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $timestamp = null;
-
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
 
@@ -35,9 +32,6 @@ class Stocks
     #[ORM\ManyToOne(inversedBy: 'stocks')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Company $fk_company = null;
-
-    #[ORM\OneToOne(mappedBy: 'fk_stocks', cascade: ['persist', 'remove'])]
-    private ?CurrentValuations $currentValuations = null;
 
     public function getId(): ?int
     {
@@ -80,18 +74,6 @@ class Stocks
         return $this;
     }
 
-    public function getTimestamp(): ?\DateTimeInterface
-    {
-        return $this->timestamp;
-    }
-
-    public function setTimestamp(?\DateTimeInterface $timestamp): static
-    {
-        $this->timestamp = $timestamp;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updated_at;
@@ -121,27 +103,11 @@ class Stocks
         return $this->fk_company;
     }
 
-    public function setFkCompanys(?Company $fk_company): static
+    public function setFkCompany(?Company $fk_company): static
     {
         $this->fk_company = $fk_company;
 
         return $this;
     }
 
-    public function getCurrentValuations(): ?CurrentValuations
-    {
-        return $this->currentValuations;
-    }
-
-    public function setCurrentValuations(CurrentValuations $currentValuations): static
-    {
-        // set the owning side of the relation if necessary
-        if ($currentValuations->getFkStocks() !== $this) {
-            $currentValuations->setFkStocks($this);
-        }
-
-        $this->currentValuations = $currentValuations;
-
-        return $this;
-    }
 }

@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StocksController!{% endblock %}
+{% block title %}Stocks List{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container">
+    <div class="card">
+        <button class="btn btn-primary col-2" onclick="window.location='{{ path('stocks_create') }}'">New</button>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/HAPE/Desktop/WEBSITE_BOKEP/src/Controller/StocksController.php</code></li>
-        <li>Your template at <code>C:/Users/HAPE/Desktop/WEBSITE_BOKEP/templates/stocks/index.html.twig</code></li>
-    </ul>
+    <div class="card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for index,Stock in stocks %}
+                    <tr>
+                        <td>{{ Stock.name }}</td>
+                        <td>{{ Stock.code }}</td>
+                        <td>{{ companyNames[index] }}</td>
+                        <td>
+                        <a href="{{path('stocks_update',{id: Stock.id})}}" class="btn btn-warning">
+                                <span class="bi bi-pencil">I</span> <!-- Edit icon using Bootstrap icons -->
+                            </a>
+
+                            <a href="#" class="btn btn-danger">
+                                <span class="bi bi-trash">X</span> <!-- Trash icon using Bootstrap icons -->
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
