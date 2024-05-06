@@ -21,20 +21,26 @@
             </thead>
             <tbody>
                 {% for index,Stock in stocks %}
-                    <tr>
-                        <td>{{ Stock.name }}</td>
-                        <td>{{ Stock.code }}</td>
-                        <td>{{ companyNames[index] }}</td>
-                        <td>
-                        <a href="{{path('stocks_update',{id: Stock.id})}}" class="btn btn-warning">
-                                <span class="bi bi-pencil">I</span> <!-- Edit icon using Bootstrap icons -->
-                            </a>
 
-                            <a href="#" class="btn btn-danger">
-                                <span class="bi bi-trash">X</span> <!-- Trash icon using Bootstrap icons -->
-                            </a>
-                        </td>
-                    </tr>
+                    {% if not Stock.isdeleted %}
+
+                        <tr>
+                            <td>{{ Stock.name }}</td>
+                            <td>{{ Stock.code }}</td>
+                            <td>{{ companyNames[index] }}</td>
+                            <td>
+                            <a href="{{path('stocks_update',{id: Stock.id})}}" class="btn btn-warning">
+                                    <span class="bi bi-pencil">I</span> <!-- Edit icon using Bootstrap icons -->
+                                </a>
+
+                                <a href="{{path('stocks_delete',{id: Stock.id})}}" class="btn btn-danger">
+                                    <span class="bi bi-trash">X</span> <!-- Trash icon using Bootstrap icons -->
+                                </a>
+                            </td>
+                        </tr>
+
+                    {% endif %}
+                                        
                 {% endfor %}
             </tbody>
         </table>

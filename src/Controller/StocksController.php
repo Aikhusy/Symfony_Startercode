@@ -65,15 +65,17 @@ class StocksController extends AbstractController
 
 
     #[Route('/stocks/update/{id}', name: 'stocks_update')]
-    public function update(Request $request, Stocks $oldStock): Response
+    public function update(Request $request, $id): Response
     {
         // dd($oldStock);
-        $stockForm= $this->createForm(StocksType::class,$oldStock);
+        $stock=$this->em->getRepository(Stocks::class)->find($id);
+
+        $stockForm= $this->createForm(StocksType::class,$stock);
         $stockForm->handleRequest($request);
-        
+
         if($stockForm->isSubmitted() && $stockForm->isValid()){
             $stock = $stockForm->getData();
-            $stock->setDeleted(false);
+            
             $stock->setUpdatedAt(new \DateTimeImmutable());
 
             $this->em->persist($stock);
@@ -88,5 +90,18 @@ class StocksController extends AbstractController
         ]);
     }
 
+    #[Route('/stocks/delete/{id}', name: 'stocks_delete')]
+    public function delete(Request $request, $id): Response
+    {
+        $stock=$this->em->getRepository(Stocks::class)->find($id);
+
+        $stock->setDeleted(true);
+
+        $this->em->persist($stock);
+            
+        $this->em->flush();
+            
+        return $this->redirectToRoute('stocks_index');
+    }
 
 }

@@ -24,7 +24,6 @@ class StocksType extends AbstractType
                 'choice_label' => 'name',
                 'choice_value'=>'id'
             ])
-            ->add('isdeleted',HiddenType::class)
             ->add('save',SubmitType::class);
     }
 
