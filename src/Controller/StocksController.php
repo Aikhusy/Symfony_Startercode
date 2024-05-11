@@ -24,7 +24,6 @@ class StocksController extends AbstractController
     {
 
         $stocks = $this->em->getRepository(Stocks::class)->findAll();
-        
         $companyNames = [];
         foreach ($stocks as $stock) {
             $companyName = $stock->getFkCompany()->getName(); // Assuming "getName()" is the method to get the company name
