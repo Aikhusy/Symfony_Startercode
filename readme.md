@@ -1,4 +1,3 @@
 <h1>List</h1>
 
-Index,layouting,migrations,
-
+Working CRUD Symfony with Stisla Admin Template
